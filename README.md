@@ -1,4 +1,4 @@
-# Cerebrum AI Assistant
+# catalyst AI Assistant
 
 A FastAPI-based AI assistant application with integrations for multiple LLM providers and services.
 
@@ -82,8 +82,8 @@ alembic upgrade head
 Build and run the Docker container:
 
 ```bash
-docker build -t cerebrum .
-docker run -p 8081:80 cerebrum
+docker build -t catalyst .
+docker run -p 8081:80 catalyst
 ```
 
 ## Testing

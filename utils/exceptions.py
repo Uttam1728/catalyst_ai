@@ -132,5 +132,5 @@ class URLConnectionException(ApplicationException):
 
 
 class SessionExpiredException(ApplicationException):
-    DEFAULT_MESSAGE = "Session Expired for Cerebrum"
+    DEFAULT_MESSAGE = "Session Expired for catalyst"
     ERROR_CODE = 6001

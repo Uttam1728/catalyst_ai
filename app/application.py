@@ -58,16 +58,16 @@ def get_app() -> FastAPI:
     # Enables sentry integration.
     configure_sentry()
 
-    cerebrum_app = FastAPI(
+    catalyst_app = FastAPI(
         debug=True,
-        title="cerebrum",
+        title="catalyst",
         docs_url="/api-reference",
         openapi_url="/openapi.json",
         lifespan=lifespan,
         root_path="/"
     )
     # Configure CORS to allow only 'wmsz0.de'
-    cerebrum_app.add_middleware(
+    catalyst_app.add_middleware(
         CORSMiddleware,
         # allow_origins=["*"],  # Only allow this origins
         allow_origins=[],  # Only allow this origins
@@ -76,24 +76,24 @@ def get_app() -> FastAPI:
         allow_headers=["*"],  # Allows all headers
     )
 
-    cerebrum_app.include_router(api_router)
-    cerebrum_app.add_middleware(SessionMiddleware, secret_key="** Session Middleware **")
-    cerebrum_app.add_middleware(SecurityHeadersMiddleware)
+    catalyst_app.include_router(api_router)
+    catalyst_app.add_middleware(SessionMiddleware, secret_key="** Session Middleware **")
+    catalyst_app.add_middleware(SecurityHeadersMiddleware)
     print(loaded_config.skip_paths_for_restriction.split(","))
     # Check if restriction middleware should be enabled from environment variable
     use_restriction_middleware = os.getenv("USE_RESTRICTION_MIDDLEWARE", "True").lower() == "true"
 
     if use_restriction_middleware:
-        cerebrum_app.add_middleware(RestrictionMiddleware, redis_url=loaded_config.redis_payments_url,
+        catalyst_app.add_middleware(RestrictionMiddleware, redis_url=loaded_config.redis_payments_url,
                                     skip_paths=loaded_config.skip_paths_for_restriction.split(","))
-    # Add the Prometheus middleware with the cerebrum prefix
+    # Add the Prometheus middleware with the catalyst prefix
     from config.logging import logger
-    cerebrum_app.add_middleware(
+    catalyst_app.add_middleware(
         PrometheusMiddleware,
-        prefix="cerebrum",
+        prefix="catalyst",
         logger=logger
     )
 
-    FastAPIInstrumentor.instrument_app(cerebrum_app)
-    cerebrum_app.add_route('/metrics', metrics_endpoint)
-    return cerebrum_app
+    FastAPIInstrumentor.instrument_app(catalyst_app)
+    catalyst_app.add_route('/metrics', metrics_endpoint)
+    return catalyst_app

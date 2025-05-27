@@ -105,7 +105,7 @@ async def execute_read_db_operation(operation: Callable, *args, **kwargs) -> Any
 
 
 @asynccontextmanager
-async def cerebrum_write_connection_handler_context():
+async def catalyst_write_connection_handler_context():
     connection_handler = ConnectionHandler(
         connection_manager=loaded_config.connection_manager
     )
@@ -116,7 +116,7 @@ async def cerebrum_write_connection_handler_context():
 
 
 @asynccontextmanager
-async def cerebrum_read_connection_handler_context():
+async def catalyst_read_connection_handler_context():
     connection_handler = ConnectionHandler(
         connection_manager=loaded_config.read_connection_manager
     )

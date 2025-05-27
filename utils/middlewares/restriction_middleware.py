@@ -47,7 +47,7 @@ class RestrictionMiddleware(BaseHTTPMiddleware):
                     status_code=status.HTTP_401_UNAUTHORIZED,
                 )
 
-            rules_key = f"plan_rules:cerebrum:{plan_id}"
+            rules_key = f"plan_rules:catalyst:{plan_id}"
             applied_rules = await self.redis.get(rules_key)
 
             try:

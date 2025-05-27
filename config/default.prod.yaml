@@ -8,8 +8,8 @@ use_dummy_user: True
 
 # Database connections
 
-db_url: "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/cerebrum"
-read_db_url: "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/cerebrum"
+db_url: "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/catalyst"
+read_db_url: "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/catalyst"
 
 # External services
 ingestion_url: "http://0.0.0.0:8002"

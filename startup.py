@@ -1,7 +1,7 @@
 """
 Database Setup and Initialization Script
 
-This script provides utilities for setting up and initializing the Cerebrum AI Assistant database.
+This script provides utilities for setting up and initializing the catalyst AI Assistant database.
 It handles database migrations using Alembic and seeds initial model configurations.
 
 Usage:

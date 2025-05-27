@@ -24,7 +24,7 @@ RUN apt-get update -y \
 
 RUN apt-get remove --purge -y linux-libc-dev
 
-WORKDIR /srv/cerebrum
+WORKDIR /srv/catalyst
 COPY ./requirements/requirements.txt .
 
 
@@ -35,8 +35,8 @@ COPY . .
 RUN git rev-parse HEAD > gitsha && rm -rf .git
 
 
-WORKDIR /srv/cerebrum
-RUN mkdir /srv/cerebrum/repos
+WORKDIR /srv/catalyst
+RUN mkdir /srv/catalyst/repos
 
 
 EXPOSE 80

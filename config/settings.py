@@ -57,7 +57,7 @@ class Settings(BaseSettings):
     # Global class instances
     connection_manager: Optional[ConnectionManager] = None
     read_connection_manager: Optional[ConnectionManager] = None
-    clerk_auth_helper: ClerkAuthHelper = ClerkAuthHelper(service_name="cerebrum", clerk_secret_key=clerk_secret_key)
+    clerk_auth_helper: ClerkAuthHelper = ClerkAuthHelper(service_name="catalyst", clerk_secret_key=clerk_secret_key)
 
     # Kubernetes configuration
     POD_NAME: str = args.K8S_POD_NAME
