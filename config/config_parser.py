@@ -5,7 +5,7 @@ import configargparse
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
 env = os.getenv('ENVIRONMENT', 'local')
-default_config_files = "{0}/{1}".format(root_dir, f"default.{env}.tmp.yaml")
+default_config_files = "{0}/{1}".format(root_dir, f"default.{env}.yaml")
 print(default_config_files)
 
 parser = configargparse.ArgParser(config_file_parser_class=configargparse.YAMLConfigFileParser,
