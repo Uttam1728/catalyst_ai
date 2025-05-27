@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  catalyst:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - ENVIRONMENT=prod
+    volumes:
+      - ./:/srv/catalyst
+      - catalyst-repos:/srv/catalyst/repos
+    network_mode: "host"  # Use host network to access local PostgreSQL
+
+volumes:
+  catalyst-repos:
