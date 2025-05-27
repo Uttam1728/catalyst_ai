@@ -16,7 +16,7 @@ from surface.constants import MessageType
 from surface.helper import SurfaceHelper
 from surface.serializers import SurfaceRequest
 from surface.services import SurfaceService
-from surface.v3.utils import transform_messages_v3
+from surface.v2.utils import transform_messages_v2
 from utils.LRU_cache import LRUCache
 from utils.base_view import BaseView
 from utils.connection_handler import execute_db_operation, ConnectionHandler
@@ -69,7 +69,7 @@ class SurfaceServiceV2:
             first_message = surface_request.data["messages"][-1].get("firstMessage", False)
             thread_id = self.thread_id
 
-            surface_request.data["messages"] = await transform_messages_v3(
+            surface_request.data["messages"] = await transform_messages_v2(
                 surface_request.data["messages"],
                 agent.llm.config.slug
             )
@@ -181,7 +181,7 @@ class SurfaceServiceV2:
                     self.surface_service_v2.last_thread_message_id = surface_request.data["messages"][-1]['id']
 
             first_message = surface_request.data["messages"][-1].get("firstMessage", False)
-            surface_request.data["messages"] = await transform_messages_v3(surface_request.data["messages"],
+            surface_request.data["messages"] = await transform_messages_v2(surface_request.data["messages"],
                                                                            agent.llm.config.slug)
             last_message = copy.deepcopy(surface_request.data["messages"][-1])
 

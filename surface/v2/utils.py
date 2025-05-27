@@ -4,7 +4,7 @@ from wrapper.ai_models import ModelRegistry
 from wrapper.dao import LLMModelConfigDAO
 
 
-async def transform_messages_v3(data, model_name):
+async def transform_messages_v2(data, model_name):
     for message in data:
         role = message.get('role')
         content = ""
@@ -25,7 +25,7 @@ async def transform_messages_v3(data, model_name):
         if 'references' in prompt_details:
             if model_llm.config.accept_image and 'image' in prompt_details['references'] or 'images' in prompt_details[
                 'references']:
-                new_content = await transform_image_messages_v3(prompt_details, model_name, new_content)
+                new_content = await transform_image_messages_v2(prompt_details, model_name, new_content)
 
         message.clear()
         message['role'] = role
@@ -34,7 +34,7 @@ async def transform_messages_v3(data, model_name):
     return data
 
 
-async def transform_image_messages_v3(prompt_details, model_name, new_content):
+async def transform_image_messages_v2(prompt_details, model_name, new_content):
     images = prompt_details.get('references', {}).get('images', [])[:4]
     async with gandalf_read_connection_handler() as connection_handler:
         model_details = await LLMModelConfigDAO(connection_handler.session).get_config_from_model_name(model_name)

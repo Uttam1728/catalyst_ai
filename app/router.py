@@ -4,7 +4,7 @@ from fastapi.routing import APIRouter
 from app.routing import CustomRequestRoute
 from mcp_configs.router import mcp_config_router_v1
 from surface.router import surface_router_v1
-from surface.v3.router import surface_router_v2
+from surface.v2.router import surface_router_v2
 from threads.router import threads_router_v1, threads_router_v2
 from wrapper.router import wrapper_router_v1
 

@@ -10,14 +10,14 @@ from config.settings import loaded_config
 from request_logger.helpers import log_tokens
 from surface.helper import SurfaceHelper
 from surface.serializers import SurfaceRequest
-from surface.v3.services.surface_service import SurfaceServiceV2
+from surface.v2.services.surface_service import SurfaceServiceV2
 from surface.views import ChatView as SurfaceChatView
 from utils.base_view import BaseView
 from utils.common import UserDataHandler
 
 
 class ChatView(BaseView):
-    """V3 Views for Chat"""
+    """ Views for Chat"""
 
     @classmethod
     async def handle_chat_request_v1(cls, surface_request: SurfaceRequest,

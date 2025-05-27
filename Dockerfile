@@ -7,19 +7,19 @@ RUN apt-get update -y \
     && apt-get upgrade -y \
     && apt-get dist-upgrade -y \
     && apt-get install -y --no-install-recommends \
-    wget \
+    bash \
+    build-essential \
+    curl \
+    git \
+    librdkafka-dev \
+    openssh-server \
     python3-pip \
     python3-setuptools \
+    wget \
     && cd /usr/local/bin \
     && pip3 --no-cache-dir install --upgrade pip \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    curl \
-    openssh-server \
-    git \
-    librdkafka-dev \
-    bash \
-    build-essential && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 RUN apt-get remove --purge -y linux-libc-dev
@@ -39,7 +39,7 @@ WORKDIR /srv/catalyst
 RUN mkdir /srv/catalyst/repos
 
 
-EXPOSE 80
+EXPOSE 8080
 RUN chmod +x ci-test.sh
 
 ENTRYPOINT ["python3", "entrypoint.py"]

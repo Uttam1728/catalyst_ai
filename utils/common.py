@@ -362,9 +362,8 @@ class UserDataHandler:
     async def get_user_data_from_request(request: Request):
         try:
             # Check if we should use dummy user based on config
-            use_dummy_user = os.getenv("USE_DUMMY_USER", "False").lower() == "true"
 
-            if use_dummy_user:
+            if loaded_config.use_dummy_user:
                 current_time = datetime.now()
                 dummy_user = UserData(
                     _id=1,

@@ -190,13 +190,21 @@ class SurfaceService:
                                                                     api_key=surface_request.metadata.get("api_key",
                                                                                                          ""),
                                                                     thread_id=self.thread_id)
-
                 yield handler.format_output(message, msg_type=MessageType.CONVERSATION_TITLE)
+                
             last_assistant_message = await self.save_assistant_message(response_text, surface_request)
-            yield handler.format_output(
-                SQLAlchemySerializer.to_serializable_dict(last_assistant_message),
-                msg_type=MessageType.LAST_AI_MESSAGE
-            )
+            if last_assistant_message:
+                yield handler.format_output(
+                    SQLAlchemySerializer.to_serializable_dict(last_assistant_message),
+                    msg_type=MessageType.LAST_AI_MESSAGE
+                )
+            else:
+                # Handle the case where message saving failed
+                yield handler.format_output(
+                    {"error": "Failed to save assistant message"},
+                    msg_type=MessageType.ERROR
+                )
+                
             yield handler.format_output("", msg_type=MessageType.STREAM_END)
         except Exception as e:
             error_response = BaseView.construct_error_response(e)
@@ -301,6 +309,11 @@ class SurfaceService:
         await thread_dao.update_thread(thread_uuid=thread_uuid, update_values_dict=update_values_dict)
 
     async def _store_conversation_summary(self, thread_id: str, thread_message_id: int, summary: str):
+        # Add validation to prevent empty thread_id
+        if not thread_id:
+            logger.error("Cannot store conversation summary: thread_id is empty")
+            return
+        
         # Implement summary storage logic here
         await execute_db_operation(
             self.add_conversation_summary,
@@ -382,6 +395,11 @@ class SurfaceService:
 
     async def save_assistant_message(self, response_text: str, surface_request: SurfaceRequest):
         try:
+            # Validate thread_id before proceeding
+            if not self.thread_id:
+                logger.error("Cannot save assistant message: thread_id is empty")
+                return None
+            
             create_message_request = CreateMessageRequest(
                 content=response_text,
                 thread_id=self.thread_id,
@@ -406,6 +424,7 @@ class SurfaceService:
             return last_ai_message
         except Exception as e:
             logger.error(f"Error storing AI message: {str(e)}")
+            return None
 
 
 class TagsService:

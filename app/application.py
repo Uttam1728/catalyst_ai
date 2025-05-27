@@ -81,7 +81,7 @@ def get_app() -> FastAPI:
     catalyst_app.add_middleware(SecurityHeadersMiddleware)
     print(loaded_config.skip_paths_for_restriction.split(","))
     # Check if restriction middleware should be enabled from environment variable
-    use_restriction_middleware = os.getenv("USE_RESTRICTION_MIDDLEWARE", "True").lower() == "true"
+    use_restriction_middleware = os.getenv("USE_RESTRICTION_MIDDLEWARE", "False").lower() == "true"
 
     if use_restriction_middleware:
         catalyst_app.add_middleware(RestrictionMiddleware, redis_url=loaded_config.redis_payments_url,

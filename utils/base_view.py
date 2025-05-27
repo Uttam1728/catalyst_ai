@@ -29,9 +29,6 @@ class BaseView:
             error_message, code = LLMErrorMessages.get_openai_error_message(exp)
         elif isinstance(exp, AnthropicError):
             error_message, code = LLMErrorMessages.get_anthropic_error_message(exp)
-        elif isinstance(exp, JIRAError):
-            error_message = "Error: Authentication failed. Please check your jira credentials or API token and try again"
-            code = 4001
         elif isinstance(exp, ApplicationException):
             code = exp.error_code
             error_message = exp.message
