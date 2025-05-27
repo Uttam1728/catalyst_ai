@@ -39,7 +39,6 @@ parser.add('--stream_token', help='stream_token')
 
 parser.add('--deepseek_api_key', help='DeepSeek model API Key')
 
-parser.add('--frodo_sentry_dsn', help='Frodo Sentry DSN')
 
 parser.add('--thread_summary_count', help='Chat message to be summarised in the entire thread to be processed')
 parser.add('--full_message_count', help='Chat messages to be sent as is.')

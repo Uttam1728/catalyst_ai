@@ -26,7 +26,6 @@ K8S_POD_NAME: "temp"
 
 # Monitoring and logging
 sentry_environment: "development"
-frodo_sentry_dsn: ""
 
 
 # Application settings
