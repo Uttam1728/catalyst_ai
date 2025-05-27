@@ -1,0 +1,41 @@
+# .gitignore
+
+# Python cache and artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.swp
+Pipfile.lock
+
+# Virtual environment directories
+env/
+venv/
+.venv/
+
+# Compiled files
+*.so
+
+# Distribution
+dist/
+build/
+*.egg-info/
+*.eggs/
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm and IntelliJ IDEA
+.idea/
+*.iml
+
+# macOS cache files
+.DS_Store
+
+# FastAPI-specific files
+async_media/
+app/db/
+*.env
+
+.conda/

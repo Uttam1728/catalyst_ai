@@ -1,0 +1,40 @@
+# Server configuration
+env: "development"
+port: 80
+host: "0.0.0.0"
+debug: true
+app_name: "ai assistant"
+use_dummy_user: True
+
+# Database connections
+
+db_url: "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/cerebrum"
+read_db_url: "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/cerebrum"
+
+# External services
+ingestion_url: "http://0.0.0.0:8002"
+
+# API keys and credentials
+openai_key: ""
+claude_key: "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"
+groq_key: ""
+bing_search_api_key: "b3b8bb7e180a47518102c72296aebe9f"
+bing_search_endpoint: "https://api.bing.microsoft.com/"
+clerk_secret_key: "sk_live_xUxRO8CmekbFhg5QShL2ShwyqleeHXkZkDKrsR852C"
+stream_token: "x-token-9f8a7c2bfa4e49bd83c6aef78b29c1d3"
+
+# Kubernetes configuration
+K8S_POD_NAME: "temp"
+
+# Monitoring and logging
+sentry_environment: "development"
+frodo_sentry_dsn: ""
+
+
+# Application settings
+thread_summary_count: 10
+full_message_count: 5
+thread_summary_context_limit: 10000
+use_thread_summaries: True
+skip_paths_for_restriction: "/_readyz,/_healthz,/openapi.json,/v3.0/surface/1/models,/v1.0/surface/vscode/config,/v2.0/surface/1/models,/v1.0/quick-start-prompts/random,/metrics"
+kb_agent_enabled: False
