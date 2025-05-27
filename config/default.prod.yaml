@@ -16,11 +16,9 @@ ingestion_url: "http://0.0.0.0:8002"
 
 # API keys and credentials
 openai_key: ""
-claude_key: "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"
+claude_key: ""
 groq_key: ""
-bing_search_api_key: "b3b8bb7e180a47518102c72296aebe9f"
-bing_search_endpoint: "https://api.bing.microsoft.com/"
-clerk_secret_key: "sk_live_xUxRO8CmekbFhg5QShL2ShwyqleeHXkZkDKrsR852C"
+clerk_secret_key: ""
 stream_token: "x-token-9f8a7c2bfa4e49bd83c6aef78b29c1d3"
 
 # Kubernetes configuration

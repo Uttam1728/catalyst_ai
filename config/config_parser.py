@@ -35,8 +35,6 @@ parser.add('--sentry_dsn', help='SENTRY_DSN')
 parser.add('--sentry_environment', help='SENTRY_ENVIRONMENT')
 
 # external API keys
-parser.add('--bing_search_api_key', help='bing_search_api_key')
-parser.add('--bing_search_endpoint', help='bing_search_endpoint')
 parser.add('--stream_token', help='stream_token')
 
 parser.add('--deepseek_api_key', help='DeepSeek model API Key')

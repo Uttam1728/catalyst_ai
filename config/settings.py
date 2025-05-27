@@ -51,8 +51,6 @@ class Settings(BaseSettings):
     claude_key: str = os.getenv("CLAUDE_KEY", args.claude_key)
     groq_key: str = os.getenv("GROQ_KEY", args.groq_key)
     deepseek_api_key: Optional[str] = args.deepseek_api_key
-    BING_SEARCH_API_KEY: str = os.getenv("BING_SEARCH_KEY", args.bing_search_api_key)
-    BING_SEARCH_ENDPOINT: str = args.bing_search_endpoint
     stream_token: str = args.stream_token
     clerk_secret_key: str = args.clerk_secret_key
 
