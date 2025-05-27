@@ -39,7 +39,7 @@ WORKDIR /srv/catalyst
 RUN mkdir /srv/catalyst/repos
 
 
-EXPOSE 8080
+EXPOSE 8081
 RUN chmod +x ci-test.sh
 
 ENTRYPOINT ["python3", "entrypoint.py"]
