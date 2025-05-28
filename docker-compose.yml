@@ -8,11 +8,27 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - ENVIRONMENT=prod
+      - ENVIRONMENT=local
     volumes:
       - ./:/srv/catalyst
       - catalyst-repos:/srv/catalyst/repos
     network_mode: "host"  # Use host network to access local PostgreSQL
+    depends_on:
+      - locksmith
+
+  locksmith:
+#    image: ghcr.io/mitanshu610/locksmith:latest
+    # If you need to build from source instead:
+    build:
+       context: https://github.com/mitanshu610/locksmith.git
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      # Add any other environment variables needed for locksmith
+    volumes:
+      - locksmith-data:/data
 
 volumes:
   catalyst-repos:
+  locksmith-data:
