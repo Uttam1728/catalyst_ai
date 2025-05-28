@@ -8,27 +8,51 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - ENVIRONMENT=local
+      - ENVIRONMENT=docker
     volumes:
       - ./:/srv/catalyst
       - catalyst-repos:/srv/catalyst/repos
-    network_mode: "host"  # Use host network to access local PostgreSQL
     depends_on:
       - locksmith
+    networks:
+      - app-network
 
   locksmith:
-#    image: ghcr.io/mitanshu610/locksmith:latest
-    # If you need to build from source instead:
     build:
-       context: https://github.com/mitanshu610/locksmith.git
+      context: https://github.com/mitanshu610/locksmith.git
     ports:
-      - "8080:8080"
+      - "8082:8082"
     environment:
-      - PORT=8080
-      # Add any other environment variables needed for locksmith
+      - PORT=8082
+      - ENVIRONMENT=docker
+      - HOST=0.0.0.0
     volumes:
-      - locksmith-data:/data
+      - locksmith-repos:/srv/locksmith/repos
+    networks:
+      - app-network
+
+  wayne:
+    build:
+      context: https://github.com/mitanshu610/wayne.git
+    ports:
+      - "8083:8083"
+    environment:
+      - PORT=8083
+      - ENVIRONMENT=docker
+      - HOST-0.0.0.0
+    volumes:
+      - wayne-repos:/srv/wayne/repos
+    depends_on:
+      - catalyst
+      - locksmith
+    networks:
+      - app-network
 
 volumes:
   catalyst-repos:
-  locksmith-data:
+  wayne-repos:
+  locksmith-repos:
+
+networks:
+  app-network:
+    driver: bridge

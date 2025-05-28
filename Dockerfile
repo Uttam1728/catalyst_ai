@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
+ENV MY_VARIABLE my_value
 
 RUN apt-get update -y \
     && apt-get upgrade -y \
@@ -36,10 +37,13 @@ RUN git rev-parse HEAD > gitsha && rm -rf .git
 
 
 WORKDIR /srv/catalyst
-RUN mkdir /srv/catalyst/repos
+RUN mkdir -p /srv/catalyst/repos
 
 
 EXPOSE 8081
 RUN chmod +x ci-test.sh
+
+ENV ENVIRONMENT docker
+RUN python3 startup.py --all
 
 ENTRYPOINT ["python3", "entrypoint.py"]

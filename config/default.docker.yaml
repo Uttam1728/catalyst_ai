@@ -1,0 +1,38 @@
+# Server configuration
+env: "local"
+port: 8081
+host: "0.0.0.0"
+debug: true
+app_name: "ai assistant"
+use_dummy_user: True
+
+# Database connections
+
+db_url: "postgresql+psycopg2://postgres:postgres@host.docker.internal:5432/catalyst_os"
+read_db_url: "postgresql+psycopg2://postgres:postgres@host.docker.internal:5432/catalyst_os"
+redis_payments_url: "redis://host.docker.internal:6379/4"
+
+# External services
+ingestion_url: "http://host.docker.internal:8099"
+
+# API keys and credentials
+openai_key: ""
+claude_key: ""
+groq_key: ""
+clerk_secret_key: ""
+stream_token: "x-token-9f8a7c2bfa4e49bd83c6aef78b29c1d3"
+
+# Kubernetes configuration
+K8S_POD_NAME: "temp"
+
+# Monitoring and logging
+sentry_environment: "development"
+
+
+# Application settings
+thread_summary_count: 10
+full_message_count: 5
+thread_summary_context_limit: 10000
+use_thread_summaries: True
+skip_paths_for_restriction: "/_readyz,/_healthz,/openapi.json,/v2.0/surface/1/models,/v1.0/surface/1/models,/metrics"
+kb_agent_enabled: False
